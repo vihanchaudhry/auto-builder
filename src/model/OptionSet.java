@@ -12,19 +12,19 @@ public class OptionSet implements Serializable {
 
     private String name;
     private ArrayList<Option> options;
+    private Option choice;
 
-    // Constructors
+    // Constructor
     protected OptionSet(String name, int size) {
         this.name = name;
         options = new ArrayList<>(size);
+        choice = null;
     }
 
-    // Getters
     protected String getName() {
         return name;
     }
 
-    // Setters
     protected void setName(String name) {
         this.name = name;
     }
@@ -51,6 +51,22 @@ public class OptionSet implements Serializable {
                 this.options.add(new Option(splitLine[i * 2 + 1], Double.parseDouble(splitLine[i * 2 + 2])));
             } catch (NumberFormatException e) {
                 throw new AutoException(AutoException.ERROR_OPTION_DATA_MISSING);
+            }
+        }
+    }
+
+    public Option getChoice() {
+        return choice;
+    }
+
+    public void setChoice(Option choice) {
+        this.choice = choice;
+    }
+
+    public void setChoiceByName(String optionName) {
+        for (Option option : options) {
+            if (option.getName().equals(optionName)) {
+                choice = option;
             }
         }
     }
@@ -109,7 +125,7 @@ public class OptionSet implements Serializable {
 
     // Inner class
     // Collected by OptionSet
-    private class Option implements Serializable {
+    protected class Option implements Serializable {
 
         private String name;
         private double price;
@@ -120,12 +136,10 @@ public class OptionSet implements Serializable {
             this.price = price;
         }
 
-        // Getters
         protected String getName() {
             return name;
         }
 
-        // Setters
         protected void setName(String name) {
             this.name = name;
         }

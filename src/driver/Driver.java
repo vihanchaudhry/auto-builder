@@ -2,9 +2,6 @@ package driver;
 
 import adapter.BuildAuto;
 import exception.AutoException;
-import model.Automobile;
-
-import java.util.LinkedHashMap;
 
 public class Driver {
 
@@ -21,10 +18,10 @@ public class Driver {
 
         // Update an OptionSet name using the UpdateAuto interface
         System.out.println("Updating OptionSet Side Impact Air Bags, then printing again...\n");
-        buildAuto.updateOptionSetName("Side Impact Air Bags", "Rainbows");
+        buildAuto.updateOptionSetName("Ford Focus Wagon ZTW", "Side Impact Air Bags", "Rainbows");
 
         // Update an Option price using the UpdateAuto interface
-        buildAuto.updateOptionPrice("Rainbows", "Yes", 700);
+        buildAuto.updateOptionPrice("Ford Focus Wagon ZTW", "Rainbows", "Yes", 700);
 
         // Print object again to test changes
         // "Side Impact Air Bags" should be "Rainbows"

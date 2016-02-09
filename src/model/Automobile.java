@@ -1,6 +1,7 @@
 package model;
 
 import exception.AutoException;
+import model.OptionSet.Option;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -15,16 +16,19 @@ public class Automobile implements Serializable {
     private String model;
     private double basePrice;
     private ArrayList<OptionSet> optionSets;
+    private ArrayList<Option> choices;
 
     // Constructors
     public Automobile() {
         optionSets = new ArrayList<>(); // Default size = 10
+        choices = new ArrayList<>();
     }
 
     public Automobile(String name, double basePrice, int size) {
         this.model = name;
         this.basePrice = basePrice;
         optionSets = new ArrayList<>(size);
+        choices = new ArrayList<>(size);
     }
 
     public String getMake() {
@@ -52,8 +56,11 @@ public class Automobile implements Serializable {
     }
 
     public int getTotalPrice() {
-        // TODO: Write this function after choice is done
-        return 0;
+        double totalPrice = basePrice;
+        for (Option choice : choices) {
+            totalPrice += choice.getPrice();
+        }
+        return (int) Math.round(totalPrice);
     }
 
     public OptionSet getOptionSet(int index) {
@@ -70,6 +77,50 @@ public class Automobile implements Serializable {
 
     public void setOptionSet(int index, OptionSet optionSet) {
         this.optionSets.set(index, optionSet);
+    }
+
+    public ArrayList<Option> getChoices() {
+        return choices;
+    }
+
+    public void setChoices(ArrayList<Option> choices) {
+        this.choices = choices;
+    }
+
+    public Option getOptionChoice(String optionSetName) {
+        for (OptionSet optionSet : optionSets) {
+            if (optionSet.getName().equals(optionSetName)) {
+                return optionSet.getChoice();
+            }
+        }
+        return null;
+    }
+
+    public String getOptionChoiceName(String optionSetName) {
+        for (OptionSet optionSet : optionSets) {
+            if (optionSet.getName().equals(optionSetName)) {
+                return optionSet.getChoice().getName();
+            }
+        }
+        return null;
+    }
+
+    public double getOptionChoicePrice(String optionSetName) {
+        for (OptionSet optionSet : optionSets) {
+            if (optionSet.getName().equals(optionSetName)) {
+                return optionSet.getChoice().getPrice();
+            }
+        }
+        return 0;
+    }
+
+    public void setOptionChoice(String optionSetName, String optionName) {
+        for (OptionSet optionSet : optionSets) {
+            if (optionSet.getName().equals(optionSetName)) {
+                optionSet.setChoiceByName(optionName);
+                choices.add(optionSet.getChoice());
+            }
+        }
     }
 
     @Override
