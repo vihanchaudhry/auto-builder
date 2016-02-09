@@ -5,6 +5,12 @@ import java.util.logging.FileHandler;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
 
+/**
+ * Vihan Chaudhry
+ * CIS 35B
+ * Lab 3
+ * 02/08/16
+ */
 public class AutoException extends Exception {
     // Constants
     public static final int ERROR_OPTION_DATA_MISSING = 1;

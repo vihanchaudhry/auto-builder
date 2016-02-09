@@ -9,7 +9,10 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * Created by Vihan on 1/24/2016.
+ * Vihan Chaudhry
+ * CIS 35B
+ * Lab 3
+ * 02/08/16
  */
 public abstract class ProxyAutomobile {
 

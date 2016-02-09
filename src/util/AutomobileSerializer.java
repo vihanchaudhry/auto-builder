@@ -6,7 +6,10 @@ import model.Automobile;
 import java.io.*;
 
 /**
- * Created by Vihan on 1/11/2016.
+ * Vihan Chaudhry
+ * CIS 35B
+ * Lab 3
+ * 02/08/16
  */
 public class AutomobileSerializer {
 

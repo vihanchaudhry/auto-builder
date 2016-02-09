@@ -6,7 +6,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- * Created by Vihan on 1/9/2016.
+ * Vihan Chaudhry
+ * CIS 35B
+ * Lab 3
+ * 02/08/16
  */
 public class OptionSet implements Serializable {
 

@@ -3,6 +3,12 @@ package driver;
 import adapter.BuildAuto;
 import exception.AutoException;
 
+/**
+ * Vihan Chaudhry
+ * CIS 35B
+ * Lab 3
+ * 02/08/16
+ */
 public class Driver {
 
     public static void main(String[] args) throws AutoException {
