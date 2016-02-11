@@ -42,7 +42,7 @@ public class Automobile implements Serializable {
         this.make = make;
     }
 
-    public String getModel() {
+    public synchronized String getModel() {
         return model;
     }
 
@@ -127,7 +127,7 @@ public class Automobile implements Serializable {
     }
 
     @Override
-    public String toString() {
+    public synchronized String toString() {
         StringBuilder sb = new StringBuilder(256);
         sb.append("Name: ").append(model)
                 .append("\nBase Price: $").append(basePrice).append("\n");
@@ -158,7 +158,7 @@ public class Automobile implements Serializable {
         return false;
     }
 
-    public void updateOptionSetName(String optionSetName, String newName) {
+    public synchronized void updateOptionSetName(String optionSetName, String newName) {
         for (OptionSet optionSet : optionSets) {
             if (optionSet.getName().equals(optionSetName)) {
                 optionSet.setName(newName);
@@ -166,7 +166,7 @@ public class Automobile implements Serializable {
         }
     }
 
-    public void updateOptionPrice(String optionSetName, String optionName, double newPrice) {
+    public synchronized void updateOptionPrice(String optionSetName, String optionName, double newPrice) {
         for (OptionSet optionSet : optionSets) {
             if (optionSet.getName().equals(optionSetName)) {
                 optionSet.updateOptionName(optionName, newPrice);
@@ -185,7 +185,7 @@ public class Automobile implements Serializable {
         return false;
     }
 
-    public void buildOptionSet(String splitLine[]) throws AutoException {
+    public synchronized void buildOptionSet(String splitLine[]) throws AutoException {
         int numberOfOptions = (splitLine.length - 1) / 2;
         OptionSet optionSet = new OptionSet(splitLine[0], numberOfOptions);
         optionSet.addOptions(splitLine, numberOfOptions);

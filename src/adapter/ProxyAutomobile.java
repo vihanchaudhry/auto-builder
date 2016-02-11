@@ -19,17 +19,18 @@ public abstract class ProxyAutomobile {
     private static LinkedHashMap<String, Automobile> automobiles = new LinkedHashMap<>();
 
     public void buildAuto(String filename) throws AutoException {
-        AutomobileReader reader = new AutomobileReader();
         addAuto(filename);
     }
 
-    public void printAuto() {
+    public void printAuto(String automobileModel) {
         Iterator iterator = automobiles.entrySet().iterator();
         Map.Entry me;
         while (iterator.hasNext()) {
             me = (Map.Entry) iterator.next();
             Automobile automobile = (Automobile) me.getValue();
-            System.out.println(automobile);
+            if (automobile.getModel().equals(automobileModel)) {
+                System.out.println(automobile);
+            }
         }
     }
 
