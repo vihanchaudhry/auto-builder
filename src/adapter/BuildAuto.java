@@ -1,9 +1,5 @@
 package adapter;
 
-import model.Automobile;
-
-import java.util.LinkedHashMap;
-
 /**
  * Vihan Chaudhry
  * CIS 35B

@@ -21,10 +21,15 @@ public class Automobile implements Serializable {
     private ArrayList<OptionSet> optionSets;
     private ArrayList<Option> choices;
 
+    // Testing
+    private boolean available;
+
     // Constructors
     public Automobile() {
         optionSets = new ArrayList<>(); // Default size = 10
         choices = new ArrayList<>();
+
+        available = true;
     }
 
     public Automobile(String name, double basePrice, int size) {
@@ -32,6 +37,8 @@ public class Automobile implements Serializable {
         this.basePrice = basePrice;
         optionSets = new ArrayList<>(size);
         choices = new ArrayList<>(size);
+
+        available = true;
     }
 
     public String getMake() {

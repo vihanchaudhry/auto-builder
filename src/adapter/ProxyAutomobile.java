@@ -4,9 +4,7 @@ import exception.AutoException;
 import model.Automobile;
 import util.AutomobileReader;
 
-import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 /**
  * Vihan Chaudhry
@@ -23,63 +21,27 @@ public abstract class ProxyAutomobile {
     }
 
     public void printAuto(String automobileModel) {
-        Iterator iterator = automobiles.entrySet().iterator();
-        Map.Entry me;
-        while (iterator.hasNext()) {
-            me = (Map.Entry) iterator.next();
-            Automobile automobile = (Automobile) me.getValue();
-            if (automobile.getModel().equals(automobileModel)) {
-                System.out.println(automobile);
-            }
-        }
+        System.out.println(automobiles.get(automobileModel));
     }
 
     public void updateOptionSetName(String automobileModel, String optionSetName, String newName) {
-        Iterator iterator = automobiles.entrySet().iterator();
-        Map.Entry me;
-        Automobile automobile;
-        while (iterator.hasNext()) {
-            me = (Map.Entry) iterator.next();
-            automobile = (Automobile) me.getValue();
-            if (automobile.getModel().equals(automobileModel)) {
-                automobile.updateOptionSetName(optionSetName, newName);
-            }
-        }
+        automobiles.get(automobileModel).updateOptionSetName(optionSetName, newName);
     }
 
     public void updateOptionPrice(String automobileModel, String optionSetName, String optionName, double newPrice) {
-        Iterator iterator = automobiles.entrySet().iterator();
-        Map.Entry me;
-        Automobile automobile;
-        while (iterator.hasNext()) {
-            me = (Map.Entry) iterator.next();
-            automobile = (Automobile) me.getValue();
-            if (automobile.getModel().equals(automobileModel)) {
-                automobile.updateOptionPrice(optionSetName, optionName, newPrice);
-            }
-        }
+        automobiles.get(automobileModel).updateOptionPrice(optionSetName, optionName, newPrice);
     }
 
     public void fix() {
 
     }
 
-    public void addAuto(String filename) throws AutoException {
-        AutomobileReader reader = new AutomobileReader();
-        Automobile automobile = reader.buildAutoObject(filename);
+    private void addAuto(String filename) throws AutoException {
+        Automobile automobile = new AutomobileReader().buildAutoObject(filename);
         automobiles.put(automobile.getModel(), automobile);
     }
 
-    public void removeAuto(String automobileModel) {
-        Iterator iterator = automobiles.entrySet().iterator();
-        Map.Entry me;
-        Automobile automobile;
-        while (iterator.hasNext()) {
-            me = (Map.Entry) iterator.next();
-            automobile = (Automobile) me.getValue();
-            if (automobile.getModel().equals(automobileModel)) {
-                automobiles.remove(automobileModel);
-            }
-        }
+    private void removeAuto(String automobileModel) {
+        automobiles.remove(automobileModel);
     }
 }

@@ -15,53 +15,31 @@ public class Driver {
     public static void main(String[] args) throws AutoException {
         // Create BuildAuto object
         BuildAuto buildAuto = new BuildAuto();
-        String filename = "fordfocuswagonztw.txt"; // Fake file name
+        String filename = "fordfocuswagonztw.txt";
 
         // Create an instance of Automobile using the CreateAuto interface
         buildAuto.buildAuto(filename);
 
-        // Create two instances of EditOptions to test threading
-        EditOptions firstModifier;
-        EditOptions secondModifier;
+        // Create two instances of EditOptions to test synchronization
+        EditOptions firstModifier = new EditOptions(buildAuto);
+        EditOptions secondModifier = new EditOptions(buildAuto);
 
-        // Strings for the field that we will modify
+        // Start both threads
+        firstModifier.start();
+        secondModifier.start();
+
+        // Name of the model that we will modify
         String automobileModel = "Ford Focus Wagon ZTW";
-        String optionSetName = "Transmission";
 
-        // Update an option set
-        firstModifier = new EditOptions(buildAuto);
-        firstModifier.updateOptionSetName(automobileModel, optionSetName, "Something");
+        // Update the same option set from two different threads
+        firstModifier.updateOptionSetName(automobileModel, "Power Moonroof", "Something");
+        secondModifier.updateOptionSetName(automobileModel, "Something", "Nothing");
 
-        // Wait a bit
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        // Update the same option set from another thread
-        secondModifier = new EditOptions(buildAuto);
-        secondModifier.updateOptionSetName(automobileModel, optionSetName, "Something Else");
+        // Update the same option price from two different threads
+        secondModifier.updateOptionPrice(automobileModel, "Nothing", "No", -100);
+        firstModifier.updateOptionPrice(automobileModel, "Nothing", "No", -295);
 
         // Print the automobile instance
         buildAuto.printAuto(automobileModel);
-
-        // Update tests from Lab 3
-        /*
-        // Print the Automobile object using the CreateAuto interface
-        buildAuto.printAuto();
-
-        // Update an OptionSet name using the UpdateAuto interface
-        System.out.println("Updating OptionSet Side Impact Air Bags, then printing again...\n");
-        buildAuto.updateOptionSetName("Ford Focus Wagon ZTW", "Side Impact Air Bags", "Rainbows");
-
-        // Update an Option price using the UpdateAuto interface
-        buildAuto.updateOptionPrice("Ford Focus Wagon ZTW", "Rainbows", "Yes", 700);
-
-        // Print object again to test changes
-        // "Side Impact Air Bags" should be "Rainbows"
-        // Price of option "Yes" should be 700 instead of 350
-        buildAuto.printAuto();
-        */
     }
 }
