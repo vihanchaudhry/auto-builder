@@ -160,8 +160,10 @@ public class OptionSet implements Serializable {
             StringBuilder sb = new StringBuilder();
             sb.append("\n\t\t").append(name)
                     .append("; Price: ");
-            if (price != 0) {
+            if (price > 0) {
                 sb.append("$").append(price);
+            } else if (price < 0) {
+                sb.append("-$").append(Math.abs(price));
             } else {
                 sb.append("N/A");
             }
