@@ -1,8 +1,6 @@
 package util;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 
@@ -31,7 +29,7 @@ public class Properties {
     public void load(BufferedReader in) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(in);
         String line = "";
-        String []splitLine;
+        String[] splitLine;
         while ((line = bufferedReader.readLine()) != null) {
             splitLine = line.split("=");
             putProperty(splitLine);
