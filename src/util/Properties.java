@@ -28,7 +28,7 @@ public class Properties {
 
     public void load(BufferedReader in) throws IOException {
         BufferedReader bufferedReader = new BufferedReader(in);
-        String line = "";
+        String line;
         String[] splitLine;
         while ((line = bufferedReader.readLine()) != null) {
             splitLine = line.split("=");
