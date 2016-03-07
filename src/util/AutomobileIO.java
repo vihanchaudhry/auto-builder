@@ -4,9 +4,7 @@ import exception.AutoException;
 import exception.FixUtil;
 import model.Automobile;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Vihan Chaudhry
@@ -14,7 +12,7 @@ import java.io.IOException;
  * Lab 3
  * 02/08/16
  */
-public class AutomobileReader {
+public class AutomobileIO {
 
     public Automobile buildAutoObject(String filename) throws AutoException {
         try {
@@ -57,5 +55,43 @@ public class AutomobileReader {
         String splitLine[] = line.split(",");
         automobile.getModel();
         automobile.buildOptionSet(splitLine);
+    }
+
+    public void serializeAutomobile(Automobile automobile) throws AutoException {
+        String filename = automobile.getModel().toLowerCase().replaceAll(" ", "") + ".ser";
+        try {
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(automobile);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            throw new AutoException(AutoException.ERROR_SERIALIZATION_FAILED);
+        }
+
+        System.out.println("Serialized data is saved in " + filename + "\n");
+    }
+
+    public Automobile deserializeAutomobile(String filename) throws IOException, AutoException {
+        Automobile automobile;
+        FileInputStream fileIn = new FileInputStream(filename);
+        ObjectInputStream in = new ObjectInputStream(fileIn);
+
+        try {
+            automobile = (Automobile) in.readObject();
+        } catch (ClassNotFoundException e) {
+            throw new AutoException(AutoException.ERROR_DESERIALING_AUTO);
+        }
+        in.close();
+        fileIn.close();
+        return automobile;
+    }
+
+    public Properties parseProperties(String filename) throws IOException {
+        Properties properties = new Properties();
+        FileReader file = new FileReader(filename);
+        BufferedReader in = new BufferedReader(file);
+        properties.load(in);
+        return properties;
     }
 }

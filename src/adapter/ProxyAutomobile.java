@@ -2,7 +2,7 @@ package adapter;
 
 import exception.AutoException;
 import model.Automobile;
-import util.AutomobileReader;
+import util.AutomobileIO;
 
 import java.util.LinkedHashMap;
 
@@ -37,7 +37,7 @@ public abstract class ProxyAutomobile {
     }
 
     private void addAuto(String filename) throws AutoException {
-        Automobile automobile = new AutomobileReader().buildAutoObject(filename);
+        Automobile automobile = new AutomobileIO().buildAutoObject(filename);
         automobiles.put(automobile.getModel(), automobile);
     }
 
