@@ -28,9 +28,9 @@ public class AutomobileIO {
             String splitLine[] = line.split(",");
             Automobile automobile = null;
             try {
-                automobile = new Automobile(splitLine[0], Double.parseDouble(splitLine[1]), 5);
+                automobile = new Automobile(splitLine[0], splitLine[1], Double.parseDouble(splitLine[2]), 5);
             } catch (ArrayIndexOutOfBoundsException e) {
-                automobile = new FixUtil().fixAutoPriceMissing(automobile, splitLine[0]);
+                automobile = new FixUtil().fixAutoPriceMissing(automobile, splitLine[0], splitLine[1]);
             }
 
             boolean eof = false;
@@ -53,7 +53,6 @@ public class AutomobileIO {
 
     public void buildOptionSetObject(Automobile automobile, String line) throws AutoException {
         String splitLine[] = line.split(",");
-        automobile.getModel();
         automobile.buildOptionSet(splitLine);
     }
 

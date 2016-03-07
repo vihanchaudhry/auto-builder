@@ -29,7 +29,7 @@ public class Driver {
         secondModifier.start();
 
         // Name of the model that we will modify
-        String automobileModel = "Ford Focus Wagon ZTW";
+        String automobileModel = "Focus Wagon ZTW";
 
         // Update the same option set from two different threads
         firstModifier.updateOptionSetName(automobileModel, "Power Moonroof", "Something");

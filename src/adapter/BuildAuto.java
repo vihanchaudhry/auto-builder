@@ -1,6 +1,9 @@
 package adapter;
 
+import model.Automobile;
 import server.AutoServer;
+
+import java.io.ObjectInputStream;
 
 /**
  * Vihan Chaudhry
@@ -9,5 +12,4 @@ import server.AutoServer;
  * 02/08/16
  */
 public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, FixAuto, AutoServer {
-
 }

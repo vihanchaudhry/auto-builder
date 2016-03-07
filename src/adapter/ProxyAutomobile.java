@@ -4,6 +4,7 @@ import exception.AutoException;
 import model.Automobile;
 import util.AutomobileIO;
 
+import java.io.ObjectInputStream;
 import java.util.LinkedHashMap;
 
 /**
@@ -33,6 +34,10 @@ public abstract class ProxyAutomobile {
     }
 
     public void fix() {
+
+    }
+
+    public void buildAutoFromProperties(ObjectInputStream properties) {
 
     }
 

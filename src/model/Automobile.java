@@ -32,8 +32,9 @@ public class Automobile implements Serializable {
         available = true;
     }
 
-    public Automobile(String name, double basePrice, int size) {
-        this.model = name;
+    public Automobile(String make, String model, double basePrice, int size) {
+        this.make = make;
+        this.model = model;
         this.basePrice = basePrice;
         optionSets = new ArrayList<>(size);
         choices = new ArrayList<>(size);
