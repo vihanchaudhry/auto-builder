@@ -1,6 +1,7 @@
 package util;
 
 import adapter.BuildAuto;
+import exception.AutoException;
 import server.BuildCarModelOptions;
 
 import java.io.IOException;
@@ -20,7 +21,7 @@ public class ServerHandler {
         buildCarModelOptions = new BuildCarModelOptions(buildAuto);
     }
 
-    public void run() throws IOException, ClassNotFoundException {
+    public void run() throws IOException, ClassNotFoundException, AutoException {
         ServerSocket serverSocket = null;
         int port = 8080;
 
