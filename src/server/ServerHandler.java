@@ -1,4 +1,4 @@
-package util;
+package server;
 
 import adapter.BuildAuto;
 import exception.AutoException;
@@ -15,7 +15,6 @@ import java.net.Socket;
  */
 public class ServerHandler {
     private BuildCarModelOptions buildCarModelOptions;
-
 
     public ServerHandler(BuildAuto buildAuto) {
         buildCarModelOptions = new BuildCarModelOptions(buildAuto);

@@ -23,7 +23,7 @@ public class CarModelOptionsIO {
         BufferedReader fromServer = null;
 
         try {
-            clientSocket = new Socket("10.41.66.140", 8080);
+            clientSocket = new Socket("127.0.0.1", 8080);
             toServer = new ObjectOutputStream(clientSocket.getOutputStream());
             fromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
         } catch (UnknownHostException e) {
