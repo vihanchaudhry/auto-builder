@@ -3,10 +3,7 @@ package util;
 import adapter.BuildAuto;
 import server.BuildCarModelOptions;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -16,11 +13,12 @@ import java.net.Socket;
 public class AutoServer {
     private BuildCarModelOptions buildCarModelOptions;
 
+
     public AutoServer(BuildAuto buildAuto) {
         buildCarModelOptions = new BuildCarModelOptions(buildAuto);
     }
 
-    public void run() throws IOException {
+    public void run() throws IOException, ClassNotFoundException {
         ServerSocket serverSocket = null;
         int port = 8080;
 
@@ -40,9 +38,16 @@ public class AutoServer {
             System.exit(1);
         }
 
-        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+        PrintWriter toClient = new PrintWriter(clientSocket.getOutputStream(), true);
+        ObjectInputStream fromClient = new ObjectInputStream(clientSocket.getInputStream());
 
-
+        while ((fromClient = (ObjectInputStream) fromClient.readObject()) != null) {
+            buildCarModelOptions.buildAutoFromProperties(fromClient);
+            toClient.println("Success!");
+        }
+        toClient.close();
+        fromClient.close();
+        clientSocket.close();
+        serverSocket.close();
     }
 }

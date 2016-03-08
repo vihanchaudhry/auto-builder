@@ -86,6 +86,12 @@ public class AutomobileIO {
         return automobile;
     }
 
+    public Properties deserializeProperties(ObjectInputStream in) throws IOException, ClassNotFoundException {
+        Properties properties = (Properties) in.readObject();
+        in.close();
+        return properties;
+    }
+
     public Properties parseProperties(String filename) throws IOException {
         Properties properties = new Properties();
         FileReader file = new FileReader(filename);

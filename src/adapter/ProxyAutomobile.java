@@ -4,8 +4,10 @@ import exception.AutoException;
 import model.Automobile;
 import util.AutomobileIO;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.LinkedHashMap;
+import java.util.Properties;
 
 /**
  * Vihan Chaudhry
@@ -37,8 +39,10 @@ public abstract class ProxyAutomobile {
 
     }
 
-    public void buildAutoFromProperties(ObjectInputStream properties) {
-
+    public void buildAutoFromProperties(ObjectInputStream propertiesStream) throws IOException, ClassNotFoundException {
+        AutomobileIO automobileIO = new AutomobileIO();
+        util.Properties properties = automobileIO.deserializeProperties(propertiesStream);
+        // TODO: Build the auto instance
     }
 
     private void addAuto(String filename) throws AutoException {
