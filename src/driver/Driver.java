@@ -1,9 +1,13 @@
 package driver;
 
 import adapter.BuildAuto;
+import client.SocketClientConstants;
 import exception.AutoException;
+import server.AutoServerSocket;
 
 import java.io.IOException;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 
 /**
  * Vihan Chaudhry
@@ -11,9 +15,9 @@ import java.io.IOException;
  * Lab 5
  * 03/07/16
  */
-public class Driver {
+public class Driver implements SocketClientConstants {
 
-    public static void main(String[] args) throws AutoException, IOException, ClassNotFoundException {
+    public static void main(String[] args) {
         // Create BuildAuto object
         BuildAuto buildAuto = new BuildAuto();
         String filename = "fordfocuswagonztw.txt";
@@ -21,6 +25,17 @@ public class Driver {
         // Create an instance of Automobile using the CreateAuto interface
         buildAuto.buildAuto(filename);
 
-        System.out.println("Reached end of program. Sockets aren't fully implemented yet");
+        // Run server socket thread
+        String strLocalHost = null;
+
+        try {
+            strLocalHost = InetAddress.getLocalHost().getHostName();
+        } catch (UnknownHostException e) {
+            System.err.println("Unable to find local host");
+            System.exit(1);
+        }
+
+        AutoServerSocket s = new AutoServerSocket(strLocalHost, iDAYTIME_PORT, buildAuto);
+        s.start();
     }
 }

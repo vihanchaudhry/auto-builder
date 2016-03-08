@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class AutomobileIO {
 
-    public Automobile buildAutoObject(String filename) throws AutoException {
+    public Automobile buildAutoFromText(String filename) throws AutoException {
         try {
             FileReader file = null;
             try {
@@ -52,7 +52,7 @@ public class AutomobileIO {
         return null;
     }
 
-    public Automobile buildAutoObject(Properties properties) throws AutoException {
+    public Automobile buildAutoFromProperties(Properties properties) {
 
         Automobile automobile = new Automobile(properties.getProperty("CarMake"), properties.getProperty("CarModel"), 0, 5);
 
@@ -71,7 +71,12 @@ public class AutomobileIO {
                 optionValueCount++;
             }
 
-            automobile.buildOptionSet((String[]) optionSetList.toArray());
+            try {
+                automobile.buildOptionSet((String[]) optionSetList.toArray());
+            } catch (AutoException e) {
+                System.err.println("Failed to build option set " + optionCount + optionValueCount + " from Properties");
+                System.exit(1);
+            }
             optionCount++;
         }
 

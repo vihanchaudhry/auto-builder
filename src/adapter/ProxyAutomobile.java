@@ -3,9 +3,8 @@ package adapter;
 import exception.AutoException;
 import model.Automobile;
 import util.AutomobileIO;
+import util.Properties;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.util.LinkedHashMap;
 
 /**
@@ -18,8 +17,13 @@ public abstract class ProxyAutomobile {
 
     private static LinkedHashMap<String, Automobile> automobiles = new LinkedHashMap<>();
 
-    public void buildAuto(String filename) throws AutoException {
-        addAuto(filename);
+    public void buildAuto(String filename) {
+        try {
+            addAuto(filename);
+        } catch (AutoException e) {
+            System.err.println("Failed to add automobile from file: " + filename);
+            System.exit(1);
+        }
     }
 
     public void printAuto(String automobileModel) {
@@ -38,15 +42,14 @@ public abstract class ProxyAutomobile {
 
     }
 
-    public void buildAutoFromProperties(ObjectInputStream propertiesStream) throws IOException, ClassNotFoundException, AutoException {
+    public void buildAutoFromProperties(Properties properties) {
         AutomobileIO automobileIO = new AutomobileIO();
-        util.Properties properties = automobileIO.deserializeProperties(propertiesStream);
-        Automobile automobile = automobileIO.buildAutoObject(properties);
+        Automobile automobile = automobileIO.buildAutoFromProperties(properties);
         automobiles.put(automobile.getModel(), automobile);
     }
 
     private void addAuto(String filename) throws AutoException {
-        Automobile automobile = new AutomobileIO().buildAutoObject(filename);
+        Automobile automobile = new AutomobileIO().buildAutoFromText(filename);
         automobiles.put(automobile.getModel(), automobile);
     }
 

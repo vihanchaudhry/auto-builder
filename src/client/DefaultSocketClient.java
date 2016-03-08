@@ -12,25 +12,27 @@ import java.util.Scanner;
 
 public class DefaultSocketClient extends Thread implements SocketClientInterface, SocketClientConstants {
 
-    private ObjectInputStream in;
-    private ObjectOutputStream out;
-    private Socket sock;
-    private String strHost;
-    private int iPort;
+    protected ObjectInputStream in;
+    protected ObjectOutputStream out;
+    protected Socket clientSocket;
+    protected String strHost;
+    protected int iPort;
 
     public DefaultSocketClient(String strHost, int iPort) {
         setPort(iPort);
         setHost(strHost);
     }//constructor
 
-    public static void main(String arg[]) {
-   /* debug main; does daytime on local host */
-        String strLocalHost = "";
+    public static void main(String[] args) {
+        /* debug main; does daytime on local host */
+        String strLocalHost = null;
+
         try {
             strLocalHost = InetAddress.getLocalHost().getHostName();
         } catch (UnknownHostException e) {
             System.err.println("Unable to find local host");
         }
+
         DefaultSocketClient d = new DefaultSocketClient(strLocalHost, iDAYTIME_PORT);
         d.start();
     }
@@ -46,15 +48,16 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
     @Override
     public boolean openConnection() {
         try {
-            sock = new Socket(strHost, iPort);
+            clientSocket = new Socket(strHost, iPort);
+            System.out.println("Client Socket opened on: " + strHost + ":" + iPort);
         } catch (IOException socketError) {
             if (DEBUG) System.err.println
                     ("Unable to connect to " + strHost);
             return false;
         }
         try {
-            in = new ObjectInputStream(sock.getInputStream());
-            out = new ObjectOutputStream(sock.getOutputStream());
+            in = new ObjectInputStream(clientSocket.getInputStream());
+            out = new ObjectOutputStream(clientSocket.getOutputStream());
         } catch (IOException e) {
             if (DEBUG) System.err.println("Unable to obtain stream to/from " + strHost);
             return false;
@@ -119,7 +122,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
         try {
             in = null;
             out = null;
-            sock.close();
+            clientSocket.close();
         } catch (IOException e) {
             if (DEBUG)
                 System.err.println("Error closing socket to " + strHost);
