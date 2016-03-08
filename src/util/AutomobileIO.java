@@ -98,22 +98,6 @@ public class AutomobileIO {
         System.out.println("Serialized data is saved in " + filename + "\n");
     }
 
-    public void serializeProperties(Properties properties) {
-        String filename = properties.getProperty("CarModel").toLowerCase().replaceAll(" ", "") + ".properties.ser";
-
-        try {
-            FileOutputStream fileOut = new FileOutputStream(filename);
-            ObjectOutputStream out = new ObjectOutputStream(fileOut);
-            out.writeObject(properties);
-            out.close();
-            fileOut.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        System.out.println("Serialized data is saved in " + filename + "\n");
-    }
-
     public Automobile deserializeAutomobile(String filename) throws IOException, AutoException {
         Automobile automobile;
         FileInputStream fileIn = new FileInputStream(filename);

@@ -1,6 +1,7 @@
 package server;
 
 import adapter.BuildAuto;
+import client.DefaultSocketClient;
 import exception.AutoException;
 
 import java.io.IOException;
@@ -12,10 +13,10 @@ import java.net.Socket;
 /**
  * Created by vihan on 3/7/16.
  */
-public class ServerHandler {
+public class Server extends DefaultSocketClient {
     private BuildCarModelOptions buildCarModelOptions;
 
-    public ServerHandler(BuildAuto buildAuto) throws AutoException, IOException, ClassNotFoundException {
+    public Server(BuildAuto buildAuto) throws AutoException, IOException, ClassNotFoundException {
         buildCarModelOptions = new BuildCarModelOptions(buildAuto);
         run();
     }

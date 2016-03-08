@@ -1,4 +1,4 @@
-package util;
+package client;
 
 public interface SocketClientConstants {
     int iECHO_PORT = 7;

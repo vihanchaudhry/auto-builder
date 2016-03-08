@@ -2,12 +2,13 @@ package util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 /**
  * Created by vihan on 3/6/16.
  */
-public class Properties {
+public class Properties implements Serializable {
     private LinkedHashMap<String, String> properties;
 
     public LinkedHashMap<String, String> getProperties() {
