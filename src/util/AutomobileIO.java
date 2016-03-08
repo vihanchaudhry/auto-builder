@@ -51,6 +51,11 @@ public class AutomobileIO {
         return null;
     }
 
+    public Automobile buildAutoObject(Properties properties) {
+        // TODO: build auto from prop
+        return null;
+    }
+
     public void buildOptionSetObject(Automobile automobile, String line) throws AutoException {
         String splitLine[] = line.split(",");
         automobile.buildOptionSet(splitLine);
