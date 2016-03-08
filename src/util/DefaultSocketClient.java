@@ -1,17 +1,16 @@
 package util;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-/**
- * Created by vihan on 3/7/16.
- */
 public class DefaultSocketClient extends Thread implements SocketClientInterface, SocketClientConstants {
 
-    private BufferedReader reader;
-    private BufferedWriter writer;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
     private Socket sock;
     private String strHost;
     private int iPort;
@@ -43,7 +42,6 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
     }//run
 
     public boolean openConnection() {
-
         try {
             sock = new Socket(strHost, iPort);
         } catch (IOException socketError) {
@@ -52,13 +50,10 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
             return false;
         }
         try {
-            reader = new BufferedReader
-                    (new InputStreamReader(sock.getInputStream()));
-            writer = new BufferedWriter
-                    (new OutputStreamWriter(sock.getOutputStream()));
-        } catch (Exception e) {
-            if (DEBUG) System.err.println
-                    ("Unable to obtain stream to/from " + strHost);
+            in = new ObjectInputStream(sock.getInputStream());
+            out = new ObjectOutputStream(sock.getOutputStream());
+        } catch (IOException e) {
+            if (DEBUG) System.err.println("Unable to obtain stream to/from " + strHost);
             return false;
         }
         return true;
@@ -66,23 +61,23 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 
     public void handleSession() {
         String strInput = "";
-        if (DEBUG) System.out.println("Handling session with "
-                + strHost + ":" + iPort);
+        if (DEBUG) System.out.println("Handling session with " + strHost + ":" + iPort);
         try {
-            while ((strInput = reader.readLine()) != null)
+            while ((strInput = (String) in.readObject()) != null)
                 handleInput(strInput);
         } catch (IOException e) {
-            if (DEBUG) System.out.println("Handling session with "
-                    + strHost + ":" + iPort);
+            if (DEBUG) System.out.println("Handling session with " + strHost + ":" + iPort);
+        } catch (ClassNotFoundException e) {
+            if (DEBUG) System.out.println("ObjectInputStream is not a String");
         }
     }
 
     public void sendOutput(String strOutput) {
         try {
-            writer.write(strOutput, 0, strOutput.length());
+            out.writeObject(strOutput);
         } catch (IOException e) {
-            if (DEBUG) System.out.println
-                    ("Error writing to " + strHost);
+            if (DEBUG)
+                System.out.println("Error writing to " + strHost);
         }
     }
 
@@ -92,12 +87,12 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 
     public void closeSession() {
         try {
-            writer = null;
-            reader = null;
+            in = null;
+            out = null;
             sock.close();
         } catch (IOException e) {
-            if (DEBUG) System.err.println
-                    ("Error closing socket to " + strHost);
+            if (DEBUG)
+                System.err.println("Error closing socket to " + strHost);
         }
     }
 

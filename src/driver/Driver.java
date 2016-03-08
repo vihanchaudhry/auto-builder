@@ -1,17 +1,15 @@
 package driver;
 
 import adapter.BuildAuto;
-import client.CarModelOptionsIO;
 import exception.AutoException;
-import server.ServerHandler;
 
 import java.io.IOException;
 
 /**
  * Vihan Chaudhry
  * CIS 35B
- * Lab 3
- * 02/08/16
+ * Lab 5
+ * 03/07/16
  */
 public class Driver {
 
@@ -23,7 +21,6 @@ public class Driver {
         // Create an instance of Automobile using the CreateAuto interface
         buildAuto.buildAuto(filename);
 
-        ServerHandler serverHandler = new ServerHandler(buildAuto);
-        CarModelOptionsIO carModelOptionsIO = new CarModelOptionsIO();
+        System.out.println("Reached end of program. Sockets aren't fully implemented yet");
     }
 }
