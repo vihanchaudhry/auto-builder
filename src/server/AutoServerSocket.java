@@ -2,15 +2,12 @@ package server;
 
 import adapter.BuildAuto;
 import client.DefaultSocketClient;
-import exception.AutoException;
 import util.Properties;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
 import java.net.ServerSocket;
-import java.net.UnknownHostException;
 
 /**
  * Created by vihan on 3/7/16.

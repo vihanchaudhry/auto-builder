@@ -1,11 +1,8 @@
 package client;
 
 import util.AutomobileIO;
-import util.Properties;
 
-import java.io.*;
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.io.IOException;
 
 /**
  * Created by vihan on 3/7/16.

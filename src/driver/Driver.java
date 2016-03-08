@@ -2,10 +2,8 @@ package driver;
 
 import adapter.BuildAuto;
 import client.SocketClientConstants;
-import exception.AutoException;
 import server.AutoServerSocket;
 
-import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
