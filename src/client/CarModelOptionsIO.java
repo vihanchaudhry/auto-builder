@@ -13,8 +13,9 @@ import java.net.UnknownHostException;
 public class CarModelOptionsIO {
     private AutomobileIO automobileIO;
 
-    public CarModelOptionsIO() {
+    public CarModelOptionsIO() throws IOException {
         automobileIO = new AutomobileIO();
+        run();
     }
 
     public void run() throws IOException {
