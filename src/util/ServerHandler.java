@@ -46,7 +46,7 @@ public class ServerHandler {
 
         while ((fromClient = (ObjectInputStream) fromClient.readObject()) != null) {
             buildCarModelOptions.buildAutoFromProperties(fromClient);
-            toClient.println("Success!");
+            toClient.println("Successfully created and added automobile object to list.");
         }
         toClient.close();
         fromClient.close();
