@@ -39,7 +39,7 @@ public abstract class ProxyAutomobile {
 
     }
 
-    public void buildAutoFromProperties(ObjectInputStream propertiesStream) throws IOException, ClassNotFoundException {
+    public void buildAutoFromProperties(ObjectInputStream propertiesStream) throws IOException, ClassNotFoundException, AutoException {
         AutomobileIO automobileIO = new AutomobileIO();
         util.Properties properties = automobileIO.deserializeProperties(propertiesStream);
         Automobile automobile = automobileIO.buildAutoObject(properties);

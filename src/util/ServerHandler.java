@@ -10,11 +10,11 @@ import java.net.Socket;
 /**
  * Created by vihan on 3/7/16.
  */
-public class AutoServer {
+public class ServerHandler {
     private BuildCarModelOptions buildCarModelOptions;
 
 
-    public AutoServer(BuildAuto buildAuto) {
+    public ServerHandler(BuildAuto buildAuto) {
         buildCarModelOptions = new BuildCarModelOptions(buildAuto);
     }
 

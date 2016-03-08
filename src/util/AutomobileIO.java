@@ -5,6 +5,7 @@ import exception.FixUtil;
 import model.Automobile;
 
 import java.io.*;
+import java.util.ArrayList;
 
 /**
  * Vihan Chaudhry
@@ -51,9 +52,30 @@ public class AutomobileIO {
         return null;
     }
 
-    public Automobile buildAutoObject(Properties properties) {
-        // TODO: build auto from prop
-        return null;
+    public Automobile buildAutoObject(Properties properties) throws AutoException {
+
+        Automobile automobile = new Automobile(properties.getProperty("CarMake"), properties.getProperty("CarModel"), 0, 5);
+
+        int optionCount = 1; // Start at Option 1
+        String currentOption;
+        String currentOptionValue;
+
+        while ((currentOption = properties.getProperty("Option" + optionCount)) != null) {
+            ArrayList<String> optionSetList = new ArrayList<>(20);
+            optionSetList.add(currentOption);
+            char optionValueCount = 'a'; // Start at OptionValue a
+
+            while ((currentOptionValue = properties.getProperty("OptionValue" + optionCount + optionValueCount)) != null) {
+                optionSetList.add(currentOptionValue);
+                optionSetList.add("0");
+                optionValueCount++;
+            }
+
+            automobile.buildOptionSet((String []) optionSetList.toArray());
+            optionCount++;
+        }
+
+        return automobile;
     }
 
     public void buildOptionSetObject(Automobile automobile, String line) throws AutoException {
@@ -71,6 +93,22 @@ public class AutomobileIO {
             fileOut.close();
         } catch (IOException e) {
             throw new AutoException(AutoException.ERROR_SERIALIZATION_FAILED);
+        }
+
+        System.out.println("Serialized data is saved in " + filename + "\n");
+    }
+
+    public void serializeProperties(Properties properties) {
+        String filename = properties.getProperty("CarModel").toLowerCase().replaceAll(" ", "") + ".properties.ser";
+
+        try {
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(properties);
+            out.close();
+            fileOut.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
         System.out.println("Serialized data is saved in " + filename + "\n");
