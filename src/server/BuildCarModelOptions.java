@@ -1,8 +1,9 @@
 package server;
 
 import adapter.BuildAuto;
-import model.Automobile;
+import exception.AutoException;
 
+import java.io.IOException;
 import java.io.ObjectInputStream;
 
 /**
@@ -16,7 +17,7 @@ public class BuildCarModelOptions implements AutoServer {
     }
 
     @Override
-    public void buildAutoFromProperties(ObjectInputStream properties) {
+    public void buildAutoFromProperties(ObjectInputStream properties) throws AutoException, IOException, ClassNotFoundException {
         buildAuto.buildAutoFromProperties(properties);
     }
 }

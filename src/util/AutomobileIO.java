@@ -71,7 +71,7 @@ public class AutomobileIO {
                 optionValueCount++;
             }
 
-            automobile.buildOptionSet((String []) optionSetList.toArray());
+            automobile.buildOptionSet((String[]) optionSetList.toArray());
             optionCount++;
         }
 

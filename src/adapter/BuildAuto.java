@@ -1,9 +1,6 @@
 package adapter;
 
-import model.Automobile;
 import server.AutoServer;
-
-import java.io.ObjectInputStream;
 
 /**
  * Vihan Chaudhry
