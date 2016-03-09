@@ -27,7 +27,7 @@ public class Driver implements SocketClientConstants {
         String strLocalHost = null;
 
         try {
-            strLocalHost = InetAddress.getLocalHost().getHostName();
+            strLocalHost = InetAddress.getLocalHost().getHostAddress().toString();
         } catch (UnknownHostException e) {
             System.err.println("Unable to find local host");
             System.exit(1);

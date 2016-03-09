@@ -72,7 +72,9 @@ public class AutomobileIO {
             }
 
             try {
-                automobile.buildOptionSet((String[]) optionSetList.toArray());
+                String optionSetArray[] = new String[optionSetList.size()];
+                optionSetArray = optionSetList.toArray(optionSetArray);
+                automobile.buildOptionSet(optionSetArray);
             } catch (AutoException e) {
                 System.err.println("Failed to build option set " + optionCount + optionValueCount + " from Properties");
                 System.exit(1);

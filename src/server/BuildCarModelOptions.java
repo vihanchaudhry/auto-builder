@@ -18,4 +18,8 @@ public class BuildCarModelOptions implements AutoServer {
     public void buildAutoFromProperties(Properties properties) {
         buildAuto.buildAutoFromProperties(properties);
     }
+
+    public void printAuto(String automobileModel) {
+        buildAuto.printAuto(automobileModel);
+    }
 }

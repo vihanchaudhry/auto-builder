@@ -28,7 +28,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
         String strLocalHost = null;
 
         try {
-            strLocalHost = InetAddress.getLocalHost().getHostName();
+            strLocalHost = InetAddress.getLocalHost().getHostAddress().toString();
         } catch (UnknownHostException e) {
             System.err.println("Unable to find local host");
         }
@@ -56,7 +56,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
             return false;
         }
         try {
-            in = new ObjectInputStream(clientSocket.getInputStream());
+            //in = new ObjectInputStream(clientSocket.getInputStream());
             out = new ObjectOutputStream(clientSocket.getOutputStream());
         } catch (IOException e) {
             if (DEBUG) System.err.println("Unable to obtain stream to/from " + strHost);

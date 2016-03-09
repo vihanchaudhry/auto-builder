@@ -11,6 +11,10 @@ import java.util.LinkedHashMap;
 public class Properties implements Serializable {
     private LinkedHashMap<String, String> properties;
 
+    public Properties() {
+        properties = new LinkedHashMap<>();
+    }
+
     public LinkedHashMap<String, String> getProperties() {
         return properties;
     }

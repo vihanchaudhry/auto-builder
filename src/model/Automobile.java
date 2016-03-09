@@ -137,7 +137,8 @@ public class Automobile implements Serializable {
     @Override
     public synchronized String toString() {
         StringBuilder sb = new StringBuilder(256);
-        sb.append("Name: ").append(model)
+        sb.append("Make: ").append(make)
+                .append("\nModel: ").append(model)
                 .append("\nBase Price: $").append(basePrice).append("\n");
         for (OptionSet optionSet : optionSets) {
             sb.append(optionSet.toString());

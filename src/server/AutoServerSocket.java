@@ -34,7 +34,7 @@ public class AutoServerSocket extends DefaultSocketClient {
 
         try {
             clientSocket = serverSocket.accept();
-            System.out.println("Client Socket opened on: " + strHost + ":" + iPort);
+            System.out.println("Client Socket accepted on: " + strHost + ":" + iPort);
         } catch (IOException e) {
             if (DEBUG) System.err.println("Accept failed");
             return false;
@@ -42,7 +42,7 @@ public class AutoServerSocket extends DefaultSocketClient {
 
         try {
             in = new ObjectInputStream(clientSocket.getInputStream());
-            out = new ObjectOutputStream(clientSocket.getOutputStream());
+            //out = new ObjectOutputStream(clientSocket.getOutputStream());
         } catch (IOException e) {
             if (DEBUG) System.err.println("Unable to obtain stream to/from port " + iPort);
             return false;
@@ -53,7 +53,7 @@ public class AutoServerSocket extends DefaultSocketClient {
 
     @Override
     public void handleSession() {
-        Properties properties;
+        Properties properties = null;
 
         try {
             if ((properties = (Properties) in.readObject()) != null) {
@@ -67,6 +67,9 @@ public class AutoServerSocket extends DefaultSocketClient {
             System.err.println("Unable to receive file from client");
             System.exit(1);
         }
+
+        System.out.println("\nNewly added automobile: \n");
+        buildCarModelOptions.printAuto(properties.getProperty("CarModel"));
     }
 
     @Override
@@ -81,38 +84,4 @@ public class AutoServerSocket extends DefaultSocketClient {
                 System.err.println("Error closing socket to " + strHost);
         }
     }
-
-    /*@Override
-    public void run() {
-        ServerSocket serverSocket = null;
-        int port = 8080;
-
-        try {
-            serverSocket = new ServerSocket(port);
-        } catch (IOException e) {
-            System.err.println("Could not listen on port: " + port);
-            System.exit(1);
-        }
-
-        Socket clientSocket = null;
-
-        try {
-            clientSocket = serverSocket.accept();
-        } catch (IOException e) {
-            System.err.println("Accept failed.");
-            System.exit(1);
-        }
-
-        PrintWriter toClient = new PrintWriter(clientSocket.getOutputStream(), true);
-        ObjectInputStream fromClient = new ObjectInputStream(clientSocket.getInputStream());
-
-        while ((fromClient = (ObjectInputStream) fromClient.readObject()) != null) {
-            buildCarModelOptions.buildAutoFromProperties(fromClient);
-            toClient.println("Successfully created and added automobile object to list.");
-        }
-        toClient.close();
-        fromClient.close();
-        clientSocket.close();
-        serverSocket.close();
-    }*/
 }
