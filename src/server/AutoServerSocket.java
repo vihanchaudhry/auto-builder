@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
+import java.util.ArrayList;
 
 /**
  * Created by vihan on 3/7/16.
@@ -40,25 +41,37 @@ public class AutoServerSocket extends DefaultSocketClient {
             return false;
         }
 
-        try {
-            in = new ObjectInputStream(clientSocket.getInputStream());
-            //out = new ObjectOutputStream(clientSocket.getOutputStream());
-        } catch (IOException e) {
-            if (DEBUG) System.err.println("Unable to obtain stream to/from port " + iPort);
-            return false;
-        }
-
         return true;
     }
 
     @Override
     public void handleSession() {
         Properties properties = null;
+        char option;
+        String model = null;
 
         try {
-            if ((properties = (Properties) in.readObject()) != null) {
-                buildCarModelOptions.buildAutoFromProperties(properties);
-                System.out.println("Successfully added automobile to the list");
+            in = new ObjectInputStream(clientSocket.getInputStream());
+        } catch (IOException e) {
+            if (DEBUG) System.err.println("Unable to obtain stream to/from port " + iPort);
+            System.exit(1);
+        }
+
+        try {
+            if (in.readObject() instanceof Properties) {
+                if ((properties = (Properties) in.readObject()) != null) {
+                    buildCarModelOptions.buildAutoFromProperties(properties);
+                    System.out.println("Successfully added automobile to the list");
+                }
+
+                System.out.println("\nNewly added automobile: \n");
+                buildCarModelOptions.printAuto(properties.getProperty("CarModel"));
+            } else if (in.readObject() instanceof Character) {
+                if ((option = (Character) in.readObject()) == 'b' || (option = (Character) in.readObject()) == 'B') {
+                    ArrayList<String> modelList = buildCarModelOptions.getModelList();
+                    out = new ObjectOutputStream(clientSocket.getOutputStream());
+                    out.writeObject(modelList);
+                }
             }
         } catch (ClassNotFoundException e) {
             System.err.println("Incoming object is not an instance of Properties");
@@ -67,10 +80,9 @@ public class AutoServerSocket extends DefaultSocketClient {
             System.err.println("Unable to receive file from client");
             System.exit(1);
         }
-
-        System.out.println("\nNewly added automobile: \n");
-        buildCarModelOptions.printAuto(properties.getProperty("CarModel"));
     }
+
+
 
     @Override
     public void closeSession() {

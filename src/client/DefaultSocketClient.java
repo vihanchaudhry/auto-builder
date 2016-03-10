@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class DefaultSocketClient extends Thread implements SocketClientInterface, SocketClientConstants {
@@ -99,6 +100,38 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 
         } else if (clientInput.charAt(0) == 'b' || clientInput.charAt(0) == 'B') {
             // TODO: Configure a car
+            // Tell server to send list
+            try {
+                out.writeObject(clientInput.charAt(0));
+            } catch (IOException e) {
+                System.err.println("Unable to send char to server");
+                System.exit(1);
+            }
+
+            try {
+                in = new ObjectInputStream(clientSocket.getInputStream());
+            } catch (IOException e) {
+                System.err.println("Could not get input stream");
+                System.exit(1);
+            }
+            // Get list of cars with letters
+            try {
+                ArrayList<String> modelList = (ArrayList<String>) in.readObject();
+                for (String model : modelList) {
+                    System.out.println(model);
+                }
+
+                // TODO: get client input on which model to get modify
+            } catch (IOException e) {
+                System.err.println("Could not get input stream array list");
+                System.exit(1);
+            } catch (ClassNotFoundException e) {
+                System.err.println("Object is not an array list");
+                System.exit(1);
+            }
+
+            // Ask for a letter
+            // Give that car
         } else {
             System.out.println("Invalid input ");
         }

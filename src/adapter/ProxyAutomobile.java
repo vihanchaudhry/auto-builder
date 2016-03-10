@@ -5,7 +5,10 @@ import model.Automobile;
 import util.AutomobileIO;
 import util.Properties;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * Vihan Chaudhry
@@ -28,6 +31,19 @@ public abstract class ProxyAutomobile {
 
     public void printAuto(String automobileModel) {
         System.out.println(automobiles.get(automobileModel));
+    }
+
+    public ArrayList<String> getModelList() {
+        Iterator it = automobiles.entrySet().iterator();
+        ArrayList<String> list = new ArrayList<>(automobiles.size());
+
+        while (it.hasNext()) {
+            Map.Entry me = (Map.Entry) it.next();
+            Automobile automobile = (Automobile) me.getValue();
+            list.add(automobile.getModel());
+        }
+
+        return list;
     }
 
     public void updateOptionSetName(String automobileModel, String optionSetName, String newName) {
