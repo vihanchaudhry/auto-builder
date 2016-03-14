@@ -49,6 +49,7 @@ public class AutoServerSocket extends DefaultSocketClient {
         Properties properties = null;
         char option;
         String model = null;
+        Object tempObj = null;
 
         try {
             in = new ObjectInputStream(clientSocket.getInputStream());
@@ -58,7 +59,8 @@ public class AutoServerSocket extends DefaultSocketClient {
         }
 
         try {
-            if (in.readObject() instanceof Properties) {
+            tempObj = in.readObject();
+            if (tempObj instanceof Properties) {
                 if ((properties = (Properties) in.readObject()) != null) {
                     buildCarModelOptions.buildAutoFromProperties(properties);
                     System.out.println("Successfully added automobile to the list");
@@ -66,18 +68,25 @@ public class AutoServerSocket extends DefaultSocketClient {
 
                 System.out.println("\nNewly added automobile: \n");
                 buildCarModelOptions.printAuto(properties.getProperty("CarModel"));
-            } else if (in.readObject() instanceof Character) {
-                if ((option = (Character) in.readObject()) == 'b' || (option = (Character) in.readObject()) == 'B') {
+            } else if (tempObj instanceof Character) {
+                option = Character.toLowerCase((Character) tempObj);
+                if (option == 'b') {
                     ArrayList<String> modelList = buildCarModelOptions.getModelList();
                     out = new ObjectOutputStream(clientSocket.getOutputStream());
                     out.writeObject(modelList);
+                    System.out.println("Sent auto list");
                 }
+
+                tempObj = in.readObject();
+                // TODO: Receive client model choice
+                
+                // TODO: Send back a copy of that model
             }
         } catch (ClassNotFoundException e) {
-            System.err.println("Incoming object is not an instance of Properties");
+            System.err.println("Incoming object is not an instance of a valid class");
             System.exit(1);
         } catch (IOException e) {
-            System.err.println("Unable to receive file from client");
+            System.err.println("Unable to receive object from client");
             System.exit(1);
         }
     }

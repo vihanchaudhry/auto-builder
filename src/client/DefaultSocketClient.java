@@ -93,6 +93,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
 
             try {
                 out.writeObject(properties);
+                System.out.println("Automobile successfully added!");
             } catch (IOException e) {
                 System.err.println("Unable to send file to server");
                 System.exit(1);
@@ -108,19 +109,20 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
                 System.exit(1);
             }
 
+            // Start Input Stream
             try {
                 in = new ObjectInputStream(clientSocket.getInputStream());
             } catch (IOException e) {
                 System.err.println("Could not get input stream");
                 System.exit(1);
             }
-            // Get list of cars with letters
-            try {
-                ArrayList<String> modelList = (ArrayList<String>) in.readObject();
-                for (String model : modelList) {
-                    System.out.println(model);
-                }
 
+            // Get list of automobile models
+            ArrayList<String> modelList = null;
+            try {
+                System.out.println("Received list of automobiles: ");
+                modelList = (ArrayList<String>) in.readObject();
+                modelList.forEach(System.out::println);
                 // TODO: get client input on which model to get modify
             } catch (IOException e) {
                 System.err.println("Could not get input stream array list");
@@ -130,8 +132,26 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
                 System.exit(1);
             }
 
-            // Ask for a letter
-            // Give that car
+            // Request client input on which automobile to configure
+            System.out.println("\nWhich automobile would you like to configure?");
+            clientInput = scanner.nextLine();
+
+            // Send the model name choice to the server
+            try {
+                if (modelList.contains(clientInput)) {
+                    out.writeObject(clientInput);
+                } else {
+                    System.out.println("Automobile not found.");
+                    System.exit(1);
+                }
+            } catch (IOException e) {
+                System.err.println("Unable to send string to server");
+                System.exit(1);
+            }
+
+            // TODO: Receive automobile object
+
+            // TODO: Configure automobile and print to screen
         } else {
             System.out.println("Invalid input ");
         }

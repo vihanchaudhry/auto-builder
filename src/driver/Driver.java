@@ -35,5 +35,6 @@ public class Driver implements SocketClientConstants {
 
         AutoServerSocket s = new AutoServerSocket(strLocalHost, iDAYTIME_PORT, buildAuto);
         s.start();
+
     }
 }

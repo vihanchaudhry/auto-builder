@@ -64,6 +64,10 @@ public abstract class ProxyAutomobile {
         automobiles.put(automobile.getModel(), automobile);
     }
 
+    public void sendAutoToClient(String automobileModel) {
+
+    }
+
     private void addAuto(String filename) throws AutoException {
         Automobile automobile = new AutomobileIO().buildAutoFromText(filename);
         automobiles.put(automobile.getModel(), automobile);
