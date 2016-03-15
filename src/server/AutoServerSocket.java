@@ -79,9 +79,9 @@ public class AutoServerSocket extends DefaultSocketClient {
                     System.out.println("Sent auto list");
                 }
 
-                tempObj = in.readObject();
                 // Receive client model choice
                 // Send back a copy of that model
+                tempObj = in.readObject();
                 if (tempObj instanceof String) {
                     model = (String) tempObj;
                     autoToClient = buildCarModelOptions.getAutomobile(model);

@@ -1,5 +1,6 @@
 package client;
 
+import model.Automobile;
 import util.AutomobileIO;
 
 import java.io.IOException;
@@ -72,6 +73,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
         Scanner scanner = new Scanner(System.in);
         String clientInput;
         util.Properties properties = null;
+        Automobile automobileForConfig = null;
 
         System.out.println("What would you like to do? (Enter a, b, or c)\n" +
                 "\ta. Upload Properties file\n" +
@@ -100,7 +102,6 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
             }
 
         } else if (clientInput.charAt(0) == 'b' || clientInput.charAt(0) == 'B') {
-            // TODO: Configure a car
             // Tell server to send list
             try {
                 out.writeObject(clientInput.charAt(0));
@@ -149,6 +150,14 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
             }
 
             // TODO: Receive automobile object
+            try {
+                automobileForConfig = (Automobile) in.readObject();
+                System.out.println("Received automobile! \n" + automobileForConfig.toString());
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
             // TODO: Configure automobile and print to screen
         } else {
