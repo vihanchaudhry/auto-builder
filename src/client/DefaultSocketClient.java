@@ -123,7 +123,6 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
                 System.out.println("Received list of automobiles: ");
                 modelList = (ArrayList<String>) in.readObject();
                 modelList.forEach(System.out::println);
-                // TODO: get client input on which model to get modify
             } catch (IOException e) {
                 System.err.println("Could not get input stream array list");
                 System.exit(1);

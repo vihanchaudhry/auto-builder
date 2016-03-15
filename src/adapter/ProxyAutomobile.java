@@ -64,8 +64,8 @@ public abstract class ProxyAutomobile {
         automobiles.put(automobile.getModel(), automobile);
     }
 
-    public void sendAutoToClient(String automobileModel) {
-
+    public Automobile getAutomobile(String automobileModel) {
+        return automobiles.get(automobileModel);
     }
 
     private void addAuto(String filename) throws AutoException {

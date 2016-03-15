@@ -1,5 +1,6 @@
 package server;
 
+import model.Automobile;
 import util.Properties;
 
 import java.util.ArrayList;
@@ -12,5 +13,5 @@ public interface AutoServer {
 
     ArrayList<String> getModelList();
 
-    void sendAutoToClient(String automobileModel);
+    Automobile getAutomobile(String automobileModel);
 }

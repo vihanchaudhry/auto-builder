@@ -1,6 +1,7 @@
 package server;
 
 import adapter.BuildAuto;
+import model.Automobile;
 import util.Properties;
 
 import java.util.ArrayList;
@@ -27,8 +28,8 @@ public class BuildCarModelOptions implements AutoServer {
     }
 
     @Override
-    public void sendAutoToClient(String automobileModel) {
-
+    public Automobile getAutomobile(String automobileModel) {
+        return buildAuto.getAutomobile(automobileModel);
     }
 
     public void printAuto(String automobileModel) {

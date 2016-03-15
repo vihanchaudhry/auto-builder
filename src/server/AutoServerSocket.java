@@ -2,6 +2,7 @@ package server;
 
 import adapter.BuildAuto;
 import client.DefaultSocketClient;
+import model.Automobile;
 import util.Properties;
 
 import java.io.IOException;
@@ -49,6 +50,7 @@ public class AutoServerSocket extends DefaultSocketClient {
         Properties properties = null;
         char option;
         String model = null;
+        Automobile autoToClient = null;
         Object tempObj = null;
 
         try {
@@ -78,9 +80,14 @@ public class AutoServerSocket extends DefaultSocketClient {
                 }
 
                 tempObj = in.readObject();
-                // TODO: Receive client model choice
-                
-                // TODO: Send back a copy of that model
+                // Receive client model choice
+                // Send back a copy of that model
+                if (tempObj instanceof String) {
+                    model = (String) tempObj;
+                    autoToClient = buildCarModelOptions.getAutomobile(model);
+                    out.writeObject(autoToClient);
+                    System.out.println("Automobile sent to client for configuration");
+                }
             }
         } catch (ClassNotFoundException e) {
             System.err.println("Incoming object is not an instance of a valid class");
