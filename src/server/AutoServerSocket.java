@@ -99,7 +99,6 @@ public class AutoServerSocket extends DefaultSocketClient {
     }
 
 
-
     @Override
     public void closeSession() {
         try {
