@@ -1,0 +1,64 @@
+**************
+SERVER CONSOLE
+**************
+Listening on port 8080
+Client socket accepted on 127.0.1.1:8080
+Sent auto list
+Automobile sent to client for configuration
+
+Process finished with exit code 0
+
+**************
+CLIENT CONSOLE
+**************
+Client Socket opened on: 127.0.1.1:8080
+What would you like to do? (Enter a or b)
+	a. Upload Properties file
+	b. Configure a car
+b
+Received list of automobiles: 
+Focus Wagon ZTW
+
+Which automobile would you like to configure?
+Focus Wagon ZTW
+Received automobile! 
+Make: Ford
+Model: Focus Wagon ZTW
+Base Price: $18445.0
+
+	Option Set: Color
+	Options: 
+		Fort Knox Gold Clearcoat Metallic; Price: N/A
+		Liquid Grey Clearcoat Metallic; Price: N/A
+		Infra-Red Clearcoat; Price: N/A
+		Grabber Green Clearcoat Metallic; Price: N/A
+		Sangria Red Clearcoat Metallic; Price: N/A
+		French Blue Clearcoat Metallic; Price: N/A
+		Twilight Blue Clearcoat Metallic; Price: N/A
+		CD Silver Clearcoat Metallic; Price: N/A
+		Pitch Black Clearcoat; Price: N/A
+		Cloud 9 White Clearcoat; Price: N/A
+
+	Option Set: Transmission
+	Options: 
+		Automatic; Price: N/A
+		Manual; Price: -$815.0
+
+	Option Set: Brakes/Traction Control
+	Options: 
+		Standard; Price: N/A
+		ABS; Price: $400.0
+		ABS with Advance Trac; Price: $1625.0
+
+	Option Set: Side Impact Air Bags
+	Options: 
+		No; Price: N/A
+		Yes; Price: $350.0
+
+	Option Set: Power Moonroof
+	Options: 
+		No; Price: N/A
+		Yes; Price: $595.0
+
+
+Process finished with exit code 0

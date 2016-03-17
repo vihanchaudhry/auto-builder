@@ -16,3 +16,4 @@ DESIGN:
 - client is asked to choose between uploading Properties to a new Automobile and configuring an existing model
 - option A: .properties file is sent to server, and the server adds valid files to the LinkedHashMap as a new Automobile
 - option B: server sends back names of existing models, then client sends back one of the model names, then server sends back an instance of that Automobile to client for configuration
+- included props file is called toyotaprius.properties

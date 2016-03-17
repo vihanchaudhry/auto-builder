@@ -1,0 +1,55 @@
+**************
+SERVER CONSOLE
+**************
+Listening on port 8080
+Client socket accepted on 127.0.1.1:8080
+Successfully added automobile Prius to the list
+
+Newly added automobile: 
+Make: Toyota
+Model: Prius
+Base Price: $0.0
+
+	Option Set: Transmission
+	Options: 
+		Manual; Price: N/A
+		Automatic; Price: N/A
+
+	Option Set: Brakes
+	Options: 
+		Regular; Price: N/A
+		ABS; Price: N/A
+
+	Option Set: Color
+	Options: 
+		Absolutely Red; Price: N/A
+		Blizzard Pearl; Price: N/A
+		Blue Ribbon Metallic; Price: N/A
+		Classic Silver Metallic; Price: N/A
+		Clear Sky Metallic; Price: N/A
+		Magnetic Gray Metallic; Price: N/A
+		Midnight Black Metallic; Price: N/A
+		Sea Green Pearl; Price: N/A
+
+	Option Set: Security System
+	Options: 
+		Standard; Price: N/A
+		VIP; Price: N/A
+
+
+Process finished with exit code 0
+
+**************
+CLIENT CONSOLE
+**************
+Client Socket opened on: 127.0.1.1:8080
+What would you like to do? (Enter a or b)
+	a. Upload Properties file
+	b. Configure a car
+a
+Please provide the name of the .properties file (including the extension): 
+toyotaprius.properties
+Valid file toyotaprius.properties found! Sending to server...
+Automobile successfully added!
+
+Process finished with exit code 0
