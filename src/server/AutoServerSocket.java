@@ -47,11 +47,11 @@ public class AutoServerSocket extends DefaultSocketClient {
 
     @Override
     public void handleSession() {
-        Properties properties = null;
+        Properties properties;
         char option;
-        String model = null;
-        Automobile autoToClient = null;
-        Object tempObj = null;
+        String model;
+        Automobile autoToClient;
+        Object tempObj;
 
         try {
             in = new ObjectInputStream(clientSocket.getInputStream());
@@ -63,12 +63,12 @@ public class AutoServerSocket extends DefaultSocketClient {
         try {
             tempObj = in.readObject();
             if (tempObj instanceof Properties) {
-                if ((properties = (Properties) in.readObject()) != null) {
+                if ((properties = (Properties) tempObj) != null) {
                     buildCarModelOptions.buildAutoFromProperties(properties);
-                    System.out.println("Successfully added automobile to the list");
+                    System.out.println("Successfully added automobile " + properties.getProperty("CarModel") + " to the list");
                 }
 
-                System.out.println("\nNewly added automobile: \n");
+                System.out.println("\nNewly added automobile: ");
                 buildCarModelOptions.printAuto(properties.getProperty("CarModel"));
             } else if (tempObj instanceof Character) {
                 option = Character.toLowerCase((Character) tempObj);
