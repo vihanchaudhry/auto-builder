@@ -1,10 +1,5 @@
 package scale;
 
-import adapter.BuildAuto;
-import adapter.CreateAuto;
-import adapter.FixAuto;
-import adapter.UpdateAuto;
-import exception.AutoException;
 import model.Automobile;
 
 import java.util.LinkedHashMap;
