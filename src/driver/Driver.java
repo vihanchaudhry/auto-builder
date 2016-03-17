@@ -13,7 +13,7 @@ import java.net.UnknownHostException;
  * Lab 5
  * 03/07/16
  */
-public class Driver implements SocketClientConstants {
+public class Driver {
 
     public static void main(String[] args) {
         // Create BuildAuto object
@@ -33,8 +33,7 @@ public class Driver implements SocketClientConstants {
             System.exit(1);
         }
 
-        AutoServerSocket s = new AutoServerSocket(strLocalHost, iDAYTIME_PORT, buildAuto);
+        AutoServerSocket s = new AutoServerSocket(strLocalHost, SocketClientConstants.iDAYTIME_PORT, buildAuto);
         s.start();
-
     }
 }

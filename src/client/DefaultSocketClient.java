@@ -149,7 +149,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
                 System.exit(1);
             }
 
-            // TODO: Receive automobile object
+            // Receive automobile object
             try {
                 automobileForConfig = (Automobile) in.readObject();
                 System.out.println("Received automobile! \n" + automobileForConfig.toString());
@@ -158,8 +158,6 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            // TODO: Configure automobile and print to screen
         } else {
             System.out.println("Invalid input ");
         }
