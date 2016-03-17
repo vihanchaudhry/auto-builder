@@ -10,7 +10,7 @@ IDE: IntelliJ IDEA
 DESIGN: 
 - client and server use object streams (i/o) for passing Automobiles and Properties to each other
 - client is run in DefaultSocketClient, server extends this class
-- there are two main methods
+- one project, two main methods (Driver and DefaultSocketClient)
 - SERVER runs in DRIVER, CLIENT runs in DEFAULTSOCKETCLIENT
 - connection is established between client and server
 - client is asked to choose between uploading Properties to a new Automobile and configuring an existing model
