@@ -75,7 +75,7 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
         util.Properties properties = null;
         Automobile automobileForConfig = null;
 
-        System.out.println("What would you like to do? (Enter a, b, or c)\n" +
+        System.out.println("What would you like to do? (Enter a or b)\n" +
                 "\ta. Upload Properties file\n" +
                 "\tb. Configure a car");
         clientInput = scanner.nextLine();
@@ -161,19 +161,6 @@ public class DefaultSocketClient extends Thread implements SocketClientInterface
         } else {
             System.out.println("Invalid input ");
         }
-    }
-
-    public void sendOutput(String strOutput) {
-        try {
-            out.writeObject(strOutput);
-        } catch (IOException e) {
-            if (DEBUG)
-                System.out.println("Error writing to " + strHost);
-        }
-    }
-
-    public void handleInput(String strInput) {
-        System.out.println(strInput);
     }
 
     @Override
