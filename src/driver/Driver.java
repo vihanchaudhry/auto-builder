@@ -4,7 +4,10 @@ import adapter.BuildAuto;
 import client.SocketClientConstants;
 import server.AutoServerSocket;
 
+import java.io.IOException;
 import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.net.UnknownHostException;
 
 /**
@@ -33,7 +36,16 @@ public class Driver {
             System.exit(1);
         }
 
-        AutoServerSocket s = new AutoServerSocket(strLocalHost, SocketClientConstants.iDAYTIME_PORT, buildAuto);
+        AutoServerSocket s = null;
+        try {
+            ServerSocket serverSocket = new ServerSocket(SocketClientConstants.iDAYTIME_PORT);
+            System.out.println("Listening on port " + SocketClientConstants.iDAYTIME_PORT);
+            s = new AutoServerSocket(strLocalHost, SocketClientConstants.iDAYTIME_PORT, serverSocket.accept(), buildAuto);
+        } catch (IOException e) {
+            System.err.println("Could not listen on port " + SocketClientConstants.iDAYTIME_PORT);
+            System.exit(1);
+        }
+
         s.start();
     }
 }

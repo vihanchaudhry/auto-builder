@@ -8,7 +8,7 @@ import util.Properties;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 /**
@@ -17,32 +17,19 @@ import java.util.ArrayList;
 public class AutoServerSocket extends DefaultSocketClient {
 
     private BuildCarModelOptions buildCarModelOptions;
-    private ServerSocket serverSocket;
 
-    public AutoServerSocket(String strHost, int iPort, BuildAuto buildAuto) {
+    public AutoServerSocket(String strHost, int iPort, Socket clientSocket, BuildAuto buildAuto) {
         super(strHost, iPort);
+        this.clientSocket = clientSocket;
+        System.out.println("Client socket accepted on " + strHost + ":" + iPort);
         buildCarModelOptions = new BuildCarModelOptions(buildAuto);
     }
 
     @Override
     public boolean openConnection() {
-        try {
-            serverSocket = new ServerSocket(iPort);
-            System.out.println("Server Socket listening on port: " + iPort);
-        } catch (IOException e) {
-            if (DEBUG) System.err.println("Could on listen on port: " + iPort);
-            return false;
-        }
-
-        try {
-            clientSocket = serverSocket.accept();
-            System.out.println("Client Socket accepted on: " + strHost + ":" + iPort);
-        } catch (IOException e) {
-            if (DEBUG) System.err.println("Accept failed");
-            return false;
-        }
-
-        return true;
+        if (clientSocket.isConnected())
+            return true;
+        return false;
     }
 
     @Override
@@ -105,7 +92,6 @@ public class AutoServerSocket extends DefaultSocketClient {
             in = null;
             out = null;
             clientSocket.close();
-            serverSocket.close();
         } catch (IOException e) {
             if (DEBUG)
                 System.err.println("Error closing socket to " + strHost);
