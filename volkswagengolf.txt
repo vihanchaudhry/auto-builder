@@ -1,0 +1,8 @@
+Volkswagen,Golf,20175
+Color,Titan Black w/ Clark Plaid,0,Carbon Steel Gray,0,Deep Black Pearl,0,Night Blue Metallic,0,Pure White,0,Reflex Silver Metallic,0,Tornado Red,0
+Transmission,Automatic,1100,Manual,0
+Interior,Titan Black Cloth,0,Beige Cloth,0
+Wheels,Standard,0,18-inch Montauk,413,16-inch Aspen Winter,260
+Cargo Organizer,No,0,Yes,199
+CARGOTECH Blocks,No,0,Yes,39
+MuddyBuddy Trunk Liner,No,0,Yes,99

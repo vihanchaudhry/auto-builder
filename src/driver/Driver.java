@@ -21,10 +21,12 @@ public class Driver {
     public static void main(String[] args) {
         // Create BuildAuto object
         BuildAuto buildAuto = new BuildAuto();
-        String filename = "fordfocuswagonztw.txt";
+        String focusFilename = "fordfocuswagonztw.txt";
+        String golfFileName = "volkswagengolf.txt";
 
         // Create an instance of Automobile using the CreateAuto interface
-        buildAuto.buildAuto(filename);
+        buildAuto.buildAuto(focusFilename);
+        buildAuto.buildAuto(golfFileName);
 
         // Run server socket thread
         String strLocalHost = null;

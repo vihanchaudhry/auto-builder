@@ -29,6 +29,7 @@ public class AutoServerSocket extends DefaultSocketClient {
     public boolean openConnection() {
         if (clientSocket.isConnected())
             return true;
+
         return false;
     }
 
@@ -43,7 +44,7 @@ public class AutoServerSocket extends DefaultSocketClient {
         try {
             in = new ObjectInputStream(clientSocket.getInputStream());
         } catch (IOException e) {
-            if (DEBUG) System.err.println("Unable to obtain stream to/from port " + iPort);
+            if (DEBUG) System.err.println("Unable to obtain ObjectInputStream on port " + iPort);
             System.exit(1);
         }
 
