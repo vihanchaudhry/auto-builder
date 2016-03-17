@@ -54,11 +54,12 @@ public class AutomobileIO {
 
     public Automobile buildAutoFromProperties(Properties properties) {
 
-        Automobile automobile = new Automobile(properties.getProperty("CarMake"), properties.getProperty("CarModel"), 0, 5);
+        Automobile automobile = new Automobile(properties.getProperty("CarMake"), properties.getProperty("CarModel"), Double.parseDouble(properties.getProperty("BasePrice")), 10);
 
         int optionCount = 1; // Start at Option 1
         String currentOption;
         String currentOptionValue;
+        String currentOptionValuePrice;
 
         while ((currentOption = properties.getProperty("Option" + optionCount)) != null) {
             ArrayList<String> optionSetList = new ArrayList<>(20);
@@ -66,8 +67,9 @@ public class AutomobileIO {
             char optionValueCount = 'a'; // Start at OptionValue a
 
             while ((currentOptionValue = properties.getProperty("OptionValue" + optionCount + optionValueCount)) != null) {
+                currentOptionValuePrice = properties.getProperty("OptionValuePrice" + optionCount + optionValueCount);
                 optionSetList.add(currentOptionValue);
-                optionSetList.add("0");
+                optionSetList.add(currentOptionValuePrice);
                 optionValueCount++;
             }
 
