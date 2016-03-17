@@ -50,7 +50,7 @@ public class Automobile implements Serializable {
         this.make = make;
     }
 
-    public synchronized String getModel() {
+    public String getModel() {
         return model;
     }
 
@@ -135,7 +135,7 @@ public class Automobile implements Serializable {
     }
 
     @Override
-    public synchronized String toString() {
+    public String toString() {
         StringBuilder sb = new StringBuilder(256);
         sb.append("Make: ").append(make)
                 .append("\nModel: ").append(model)
@@ -194,7 +194,7 @@ public class Automobile implements Serializable {
         return false;
     }
 
-    public synchronized void buildOptionSet(String splitLine[]) throws AutoException {
+    public synchronized void addOptionSet(String splitLine[]) throws AutoException {
         int numberOfOptions = (splitLine.length - 1) / 2;
         OptionSet optionSet = new OptionSet(splitLine[0], numberOfOptions);
         optionSet.addOptions(splitLine, numberOfOptions);

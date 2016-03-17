@@ -2,6 +2,7 @@ package adapter;
 
 import exception.AutoException;
 import model.Automobile;
+import scale.EditOptions;
 import util.AutomobileIO;
 import util.Properties;
 
@@ -50,8 +51,21 @@ public abstract class ProxyAutomobile {
         automobiles.get(automobileModel).updateOptionSetName(optionSetName, newName);
     }
 
+
+    public void threadedUpdateOptionSetName(String automobileModel, String optionSetName, String newName) {
+        EditOptions editOptions = new EditOptions();
+        editOptions.start();
+        editOptions.updateOptionSetName(automobiles, automobileModel, optionSetName, newName);
+    }
+
     public void updateOptionPrice(String automobileModel, String optionSetName, String optionName, double newPrice) {
         automobiles.get(automobileModel).updateOptionPrice(optionSetName, optionName, newPrice);
+    }
+
+    public void threadedUpdateOptionPrice(String automobileModel, String optionSetName, String optionName, double newPrice) {
+        EditOptions editOptions = new EditOptions();
+        editOptions.start();
+        editOptions.updateOptionPrice(automobiles, automobileModel, optionSetName, optionName, newPrice);
     }
 
     public void fix() {

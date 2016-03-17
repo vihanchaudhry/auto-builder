@@ -2,3 +2,13 @@ Lab 1:
 -3 points for not using packages - FIXED
 
 Lab 2: 
+-1 point for not submitting diagram - FIXED
+-0.5 points for not submitting design documentation - FIXED
+
+Lab 3: N/A
+
+Lab 4:
+-1 point for synchronizing methods that did not require it - FIXED
+-1 point for not demonstrating data corruption - FIXED
+-2 points for not using interface for interaction between EditOptions and BuildAuto class - FIXED
+-1 point for EditOption implementing existing interfaces - FIXED

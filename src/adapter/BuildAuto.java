@@ -8,5 +8,5 @@ import server.AutoServer;
  * Lab 3
  * 02/08/16
  */
-public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, FixAuto, AutoServer {
+public class BuildAuto extends ProxyAutomobile implements CreateAuto, UpdateAuto, FixAuto, EditThread, AutoServer {
 }

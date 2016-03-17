@@ -74,7 +74,7 @@ public class AutomobileIO {
             try {
                 String optionSetArray[] = new String[optionSetList.size()];
                 optionSetArray = optionSetList.toArray(optionSetArray);
-                automobile.buildOptionSet(optionSetArray);
+                automobile.addOptionSet(optionSetArray);
             } catch (AutoException e) {
                 System.err.println("Failed to build option set " + optionCount + optionValueCount + " from Properties");
                 System.exit(1);
@@ -87,7 +87,7 @@ public class AutomobileIO {
 
     public void buildOptionSetObject(Automobile automobile, String line) throws AutoException {
         String splitLine[] = line.split(",");
-        automobile.buildOptionSet(splitLine);
+        automobile.addOptionSet(splitLine);
     }
 
     public void serializeAutomobile(Automobile automobile) throws AutoException {
